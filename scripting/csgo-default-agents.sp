@@ -42,6 +42,8 @@ ArrayList TerrorArmsArray;
 ArrayList CTerrorSkinArray;
 ArrayList CTerrorArmsArray;
 
+Handle h_SetModel;
+
 public Plugin myinfo = {
 	name = "[CS:GO] Default Agents",
 	author = "PandahChan, B3none",
@@ -49,8 +51,6 @@ public Plugin myinfo = {
 	version = "1.0.0",
 	url = "https://github.com/b3none/csgo-default-agents"
 };
-
-Handle h_SetModel;
 
 public void OnPluginStart()
 {
