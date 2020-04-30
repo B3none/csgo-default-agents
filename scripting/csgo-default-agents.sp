@@ -3,7 +3,12 @@
 #include <cstrike>
 #include <dhooks>
 
-// Valve Agents models list
+#pragma newdecls required
+#pragma semicolon 1
+
+#define MAX_SKINS_COUNT 256
+#define MAX_SKIN_LENGTH 256
+
 char Agents[][] = {
 	"models/player/custom_player/legacy/tm_phoenix_varianth.mdl",
 	"models/player/custom_player/legacy/tm_phoenix_variantg.mdl",
@@ -29,11 +34,6 @@ char Agents[][] = {
 	"models/player/custom_player/legacy/ctm_st6_variantk.mdl"
 };
 
-#define MAX_SKINS_COUNT 256
-#define MAX_SKIN_LENGTH 256
-
-#define newdecls required
-
 int TSkins_Count;
 int CTSkins_Count;
 
@@ -57,7 +57,7 @@ public void OnPluginStart()
 	Handle h_GameConf;
 
 	h_GameConf = LoadGameConfigFile("sdktools.games");
-	if(h_GameConf == INVALID_HANDLE)
+	if (h_GameConf == null)
     {
         SetFailState("Gamedata file sdktools.games.txt is missing.");
     }
@@ -65,7 +65,7 @@ public void OnPluginStart()
 	int i_Offset = GameConfGetOffset(h_GameConf, "SetEntityModel");
 	CloseHandle(h_GameConf);
 
-	if(i_Offset == -1)
+	if (i_Offset == -1)
     {
         SetFailState("Gamedata is missing the \"SetEntityModel\" offset.");
     }
@@ -81,9 +81,9 @@ public void OnMapStart()
 	CTerrorSkinArray = new ArrayList(MAX_SKIN_LENGTH);
 	CTerrorArmsArray = new ArrayList(MAX_SKIN_LENGTH);
 
-
 	char file[PLATFORM_MAX_PATH];
 	char currentMap[PLATFORM_MAX_PATH];
+
 	GetCurrentMap(currentMap, sizeof(currentMap));
 
 	BuildPath(Path_SM, file, sizeof(file), "configs/playermodels/%s.cfg", currentMap);
@@ -123,7 +123,11 @@ public void PrepareConfig(const char[] file)
 		}
 		while (KvGotoNextKey(kv))
 	}
-	else SetFailState("Fatal error: Missing \"Terrorists\" section!");
+	else 
+	{
+		SetFailState("Fatal error: Missing \"Terrorists\" section!");
+	}
+
 	KvRewind(kv);
 
 	if (KvJumpToKey(kv, "Counter-Terrorists"))
@@ -147,7 +151,10 @@ public void PrepareConfig(const char[] file)
 		}
 		while (KvGotoNextKey(kv))
 	}
-	else SetFailState("Fatal error: Missing \"Counter-Terrorists\" section!");
+	else 
+	{
+		SetFailState("Fatal error: Missing \"Counter-Terrorists\" section!");
+	}
 
 	KvRewind(kv);
 	CloseHandle(kv);
@@ -155,7 +162,10 @@ public void PrepareConfig(const char[] file)
 
 public void OnClientPutInServer(int client)
 {
-	if(IsFakeClient(client)) return;
+	if (IsFakeClient(client)) 
+	{
+		return;
+	}
 
 	DHookEntity(h_SetModel, true, client);
 }
@@ -169,12 +179,17 @@ public MRESReturn ReModel(int client, Handle hParams)
 
 public Action SetModel(Handle timer, int client)
 {
-	if (!IsClientInGame(client) || !IsPlayerAlive(client)) return;
+	if (!IsClientInGame(client) || !IsPlayerAlive(client)) 
+	{
+		return;
+	}
 
 	int team = GetClientTeam(client);
 
-	if (team < 2) return;
-
+	if (team < 2) 
+	{
+		return;
+	}
 
 	char model[128];
 	GetClientModel(client, model, sizeof(model));
@@ -184,7 +199,7 @@ public Action SetModel(Handle timer, int client)
 
 	for (int i = 0; i < sizeof(Agents); i++)
 	{
-		if(StrEqual(model, Agents[i]))
+		if (StrEqual(model, Agents[i]))
 		{
 			if (team == CS_TEAM_CT)
             {
