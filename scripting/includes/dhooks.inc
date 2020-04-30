@@ -151,6 +151,7 @@ typeset DHookRemovalCB
 {
 	function void (int hookid);
 };
+
 typeset DHookCallback
 {
 	//Function Example: void Ham::Test() with this pointer ignore
