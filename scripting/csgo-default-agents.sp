@@ -34,9 +34,6 @@ char Agents[][] = {
     "models/player/custom_player/legacy/ctm_st6_variantk.mdl"
 };
 
-int TSkins_Count;
-int CTSkins_Count;
-
 ArrayList TerrorSkinArray;
 ArrayList TerrorArmsArray;
 ArrayList CTerrorSkinArray;
@@ -96,7 +93,7 @@ public void OnMapEnd()
     ClearArray(TerrorSkinArray);
     ClearArray(TerrorArmsArray);
     ClearArray(CTerrorSkinArray);
-    ClearArray(CTerrorArmsArray)
+    ClearArray(CTerrorArmsArray);
 }
 
 public void PrepareConfig(const char[] file)
@@ -122,7 +119,7 @@ public void PrepareConfig(const char[] file)
                 PrecacheModel(arms);
             }
         }
-        while (KvGotoNextKey(kv))
+        while (KvGotoNextKey(kv));
     }
     else
     {
@@ -150,7 +147,7 @@ public void PrepareConfig(const char[] file)
                 PrecacheModel(arms);
             }
         }
-        while (KvGotoNextKey(kv))
+        while (KvGotoNextKey(kv));
     }
     else
     {
@@ -207,7 +204,7 @@ public Action SetModel(Handle timer, int client)
                 char[] skinModelFile = new char[PLATFORM_MAX_PATH];
                 GetArrayString(CTerrorSkinArray, ctrandom, skinModelFile, PLATFORM_MAX_PATH);
                 char[] armModelFile = new char[PLATFORM_MAX_PATH];
-                GetArrayString(CTerrorArmsArray, ctrandom, armModelFile, PLATFORM_MAX_PATH)
+                GetArrayString(CTerrorArmsArray, ctrandom, armModelFile, PLATFORM_MAX_PATH);
                 SetEntityModel(client, skinModelFile);
                 SetEntPropString(client, Prop_Send, "m_szArmsModel", armModelFile);
             }
@@ -216,7 +213,7 @@ public Action SetModel(Handle timer, int client)
                 char[] skinModelFile = new char[PLATFORM_MAX_PATH];
                 GetArrayString(TerrorSkinArray, trandom, skinModelFile, PLATFORM_MAX_PATH);
                 char[] armModelFile = new char[PLATFORM_MAX_PATH];
-                GetArrayString(TerrorArmsArray, trandom, armModelFile, PLATFORM_MAX_PATH)
+                GetArrayString(TerrorArmsArray, trandom, armModelFile, PLATFORM_MAX_PATH);
                 SetEntityModel(client, skinModelFile);
                 SetEntPropString(client, Prop_Send, "m_szArmsModel", armModelFile);
             }
