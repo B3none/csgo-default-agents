@@ -1,5 +1,5 @@
 # CS:GO Default Agents
-Here's my ported and slightly modified version of [PandahChan's](https://github.com/pandahchan) plugin to enforce CS:GO default agents.
+Here's my slightly modified version of [PandahChan's](https://github.com/pandahchan) plugin to enforce CS:GO default agents.
 
 # Compiling
 To compile this plugin I'd recommend using the [web compiler](https://spider.limetech.io/).
