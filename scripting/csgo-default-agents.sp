@@ -44,7 +44,7 @@ ArrayList CTerrorArmsArray;
 
 public Plugin myinfo = {
 	name = "[CS:GO] Default Agents",
-	author = "PandahChan",
+	author = "PandahChan, B3none",
 	description = "Plugin to enforce CS:GO default agents",
 	version = "1.0.0",
 	url = "https://github.com/b3none/csgo-default-agents"
